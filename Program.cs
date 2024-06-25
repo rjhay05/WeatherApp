@@ -1,15 +1,22 @@
+using WeatherApp.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<WeatherService>();
+builder.Services.AddHttpClient<GeoLocationService>();
+builder.Services.AddTransient<IWeatherService, WeatherService>();
+builder.Services.AddTransient<IGeoLocationService, GeoLocationService>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
-{
     app.UseExceptionHandler("/Home/Error");
-}
+else if(app.Environment.IsDevelopment())
+    app.UseDeveloperExceptionPage();
+
 app.UseStaticFiles();
 
 app.UseRouting();
