@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "jquery@3.7.1",
+      "destination": "wwwroot/lib/jquery/",
+      "files": [
+        "jquery.min.js",
+        "jquery.js"
+      ]
+    },
+    {
+      "library": "x2js@1.2.0",
+      "destination": "wwwroot/lib/x2js/",
+      "files": [
+        "xml2json.min.js",
+        "xml2json.js"
+      ]
+    }
+  ]
+}

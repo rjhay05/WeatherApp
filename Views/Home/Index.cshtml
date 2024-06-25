@@ -1,8 +1,29 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Weather Check";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<form id="weather-form">
+    <div>
+        <button id="json-selection">JSON</button>
+        <button id="xml-selection">XML</button>
+        <input id="selection-value" type="hidden" value="json" />
+    </div>
+    <div>
+        <input type="text" placeholder="Enter City"/>
+        <button>Get Weather</button>
+    </div>
+</form>
+
+<h2>Weather Result</h2>
+
+<div class="code-snippet">
+    <button class="copy-button">Copy</button>
+    <pre id="code-snippet"><code class="snippet">
+    </code></pre>
 </div>
+
+
+@section Scripts {
+    <script type="text/javascript" src="/js/weatherscript.js" on-content-loaded></script>
+}
+
