@@ -1,23 +1,41 @@
 ﻿$(document).ready(function () {
     $('#weather-form').submit(function (e) {
         e.preventDefault();
-        var formData = $('#weather-form input').map(function () {
-            return $(this).val();
-        }).get();
+        const responseType = $('#weather-form input[type="radio"]:checked').val();
+        const city = $('#weather-form input[type="search"]').val();
+        const formData = [responseType, city];
+
         $.ajax({
             url: 'get-weather',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(formData),
             success: function (result, status, xhr) {
-                if ($('#selection-value').val() == "xml") {
+                let main;
+                let description;
+                let temp;
+                let humidity;
+
+                const jsonString = JSON.stringify(result, null, 2)
+                    
+                if (responseType == "xml") {
+                    main = result.weather.value;
+                    temp = result.temperature.value;
+                    humidity = result.humidity.value;
+                    description = result.clouds.name;
                     var x2js = new X2JS();
                     var xmlStr = x2js.json2xml_str(result);
                     $('.snippet').text(xmlStr);
-                    return;
-                } 
-                const jsonString = JSON.stringify(result, null, 2);
-                $('.snippet').text(jsonString);
+                } else {
+                    main = result.weather[0].main;
+                    description = result.weather[0].description;
+                    temp = result.main.temp
+                    humidity = result.main.humidity;
+                    $('.snippet').text(jsonString);
+                }
+                $('#title').text(main);
+                $('#sub-title').text(`${temp}°F, ${humidity}% Humidity`);
+                $('#description').text(description);
             },
             error: function (error, status, xhr) {
                 console.log(error);
@@ -33,30 +51,11 @@
         document.execCommand('copy');
         tempInput.remove();
     
-        $(this).textContent = 'Copied!';
+        $(this).text('Copied!');
         setTimeout(function () {
-            $(this).textContent = 'Copy';
+            $('.copy-button').text('Copy');
         }, 2000);
-    });
-
-    $('#json-selection').click(function (e) {
-        e.preventDefault()
-        $('#selection-value').val("json");
-    });
-
-    $('#xml-selection').click(function (e) {
-        e.preventDefault();
-        $('#selection-value').val("xml");
     });
 });
 
-function copyCode(button) {
-    var code = button.nextElementSibling.innerText;
-    navigator.clipboard.writeText(code).then(function () {
-        button.textContent = 'Copied!';
-        setTimeout(function () {
-            button.textContent = 'Copy';
-        }, 2000);
-    });
-}
 

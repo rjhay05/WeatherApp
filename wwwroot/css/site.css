@@ -2,12 +2,6 @@ html {
     font-size: 14px;
 }
 
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-}
-
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -20,6 +14,93 @@ html {
 body {
     margin-bottom: 60px;
 }
+
+
+
+/*Redio inputs*/
+.radio-inputs {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 0.5rem;
+    background-color: #EEE;
+    box-sizing: border-box;
+    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+    padding: 0.25rem;
+    width: 100px;
+    font-size: 14px;
+}
+
+.radio-inputs .radio {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.radio-inputs .radio input {
+    display: none;
+}
+
+.radio-inputs .radio .name {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: none;
+    padding: .5rem 0;
+    color: rgba(51, 65, 85, 1);
+    transition: all .15s ease-in-out;
+}
+
+.radio-inputs .radio input:checked + .name {
+    background-color: #fff;
+    font-weight: 600;
+}
+
+/*Search element*/
+.group {
+    display: flex;
+    line-height: 28px;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.input {
+    width: 100%;
+    height: 40px;
+    line-height: 28px;
+    padding: 0 1rem;
+    padding-left: 2.5rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    background-color: #f3f3f4;
+    color: #0d0c22;
+    transition: 0.3s ease;
+}
+
+.input::placeholder {
+    color: #9e9ea7;
+}
+
+.input:focus,
+input:hover {
+    outline: none;
+    border-color: rgba(234, 226, 183, 0.4);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgb(234 226 183 / 10%);
+}
+
+.icon {
+    position: absolute;
+    left: 1rem;
+    fill: #9e9ea7;
+    width: 1rem;
+    height: 1rem;
+}
+
+
 
 .code-snippet {
     position: relative;
@@ -51,4 +132,16 @@ body {
 
 .copy-button:hover {
     background-color: #0056b3;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1140px) {
+    .container{
+        width: 50%;
+    }
 }
